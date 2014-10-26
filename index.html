@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Elevation Comparator</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-app="app">
+
+    <div>
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+    </div>
+
+    <div class="container">
+        <h1>Elevation Comparator</h1>
+        <p class="lead">Which is the tallest ?</p>
+        <div ng-controller="ParentController as parentCtrl">
+
+            <p>You did {{childCtrl.nbComparisons}} comparisons</p>
+
+            <div ng-controller="ChildController as childCtrl">
+
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <span>Choose your mountains :</span>
+                    </div>
+
+                    <div class="col-md-10">
+                        <form role="form">
+                            <div ng-repeat="mountain in childCtrl.mountains" class="checkbox">
+                                <label>
+                                    <input type="checkbox" checklist-model="childCtrl.selectedMountains" checklist-value="mountain" ng-click="childCtrl.update()"> {{mountain.name}}
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <p ng-show="childCtrl.highestMountain.name">
+                    The highest is {{childCtrl.highestMountain.name}} :
+                    {{childCtrl.units === 'm' ? childCtrl.highestMountain.heightM + ' meters' : childCtrl.highestMountain.heightF + ' feet'}} </p>
+                <button type="button" class="btn btn-default" ng-click="childCtrl.openSettings()">Change Units</button>
+
+                <br/><br/>
+
+                <p ng-bind-html="childCtrl.mountainDesc"></p>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--Libraries-->
+    <script type="text/javascript" src="js/vendor/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="js/vendor/angular.js"></script>
+    <script type="text/javascript" src="js/vendor/checklist-model.js"></script>
+    <script type="text/javascript" src="js/vendor/angular-sanitize.js"></script>
+    <script type="text/javascript" src="js/vendor/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap.js"></script>
+
+    <!--Application files-->
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controllers/parentController.js"></script>
+    <script type="text/javascript" src="js/controllers/childController.js"></script>
+    <script type="text/javascript" src="js/controllers/modalController.js"></script>
+
+    <script type="text/ng-template" id="html/everest.html">
+        <b>Mount Everest</b>, <a href="#Name">also known</a> in <a href="/wiki/Nepal" title="Nepal">Nepal</a> as <b>Sagarmāthā</b> and in <a href="/wiki/Tibet" title="Tibet">Tibet</a> as <b>Chomolungma</b>, is the <a href="/wiki/Earth" title="Earth">Earth</a>'s <a href="/wiki/List_of_highest_mountains" title="List of highest mountains">highest mountain</a>. It is located in the <a href="/wiki/Mahalangur_Himal" title="Mahalangur Himal">Mahalangur</a> section of the <a href="/wiki/Himalayas" title="Himalayas">Himalayas</a>. Its peak is 8,848 metres (29,029&nbsp;ft) above sea level<sup id="cite_ref-ReferenceB_1-1" class="reference"><a href="#cite_note-ReferenceB-1"><span>[</span>1<span>]</span></a></sup> and is the <a href="/wiki/List_of_mountains#Summits_farthest_from_the_Earth.27s_center" title="List of mountains">5th furthest point from the center of the Earth</a>.<sup id="cite_ref-Robert_Krulwich_6-0" class="reference"><a href="#cite_note-Robert_Krulwich-6"><span>[</span>6<span>]</span></a></sup> The international border between <a href="/wiki/China" title="China">China</a> and Nepal runs across the precise summit point. Its <a href="/wiki/Massif" title="Massif">massif</a> includes neighboring peaks <a href="/wiki/Lhotse" title="Lhotse">Lhotse</a>, 8,516&nbsp;m (27,940&nbsp;ft); <a href="/wiki/Nuptse" title="Nuptse">Nuptse</a>, 7,855&nbsp;m (25,771&nbsp;ft) and <a href="/wiki/Changtse" title="Changtse">Changtse</a>, 7,580&nbsp;m (24,870&nbsp;ft).
+    </script>
+
+    <script type="text/ng-template" id="html/kilimandjaro.html">
+        <b>Mount Kilimanjaro</b> <span class="nowrap"><span title="Representation in the International Phonetic Alphabet (IPA)" class="IPA"><a href="/wiki/Help:IPA_for_English" title="Help:IPA for English">/</a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="/ˌ/ secondary stress follows" style="border-bottom:1px dotted">ˌ</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="'k' in 'kind'" style="border-bottom:1px dotted">k</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="/ɪ/ short 'i' in 'bid'" style="border-bottom:1px dotted">ɪ</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="'l' in 'lie'" style="border-bottom:1px dotted">l</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="/ɪ/ short 'i' in 'bid'" style="border-bottom:1px dotted">ɪ</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="'m' in 'my'" style="border-bottom:1px dotted">m</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="/ə/ 'u' in 'syrup'" style="border-bottom:1px dotted">ə</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="'n' in 'nigh'" style="border-bottom:1px dotted">n</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="/ˈ/ primary stress follows" style="border-bottom:1px dotted">ˈ</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="/dʒ/ 'j' in 'jam'" style="border-bottom:1px dotted">dʒ</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="/ɑː/ 'a' in 'father'" style="border-bottom:1px dotted">ɑː</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="'r' in 'rye'" style="border-bottom:1px dotted">r</span></a></span><span class="IPA nopopups"><a href="/wiki/Help:IPA_for_English#Key" title="Help:IPA for English"><span title="/oʊ/ long 'o' in 'bode'" style="border-bottom:1px dotted">oʊ</span></a></span><span title="Representation in the International Phonetic Alphabet (IPA)" class="IPA"><a href="/wiki/Help:IPA_for_English" title="Help:IPA for English">/</a></span></span>,<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>5<span>]</span></a></sup> with its three <a href="/wiki/Volcanic_cone" title="Volcanic cone">volcanic cones</a>, <b>Kibo</b>, <b>Mawenzi</b> and <b>Shira</b>, is a dormant volcanic mountain in <a href="/wiki/Tanzania" title="Tanzania">Tanzania</a>. It is the highest mountain in <a href="/wiki/Africa" title="Africa">Africa</a> and the highest free-standing mountain in the <a href="/wiki/World" title="World">world</a> at 5,895 metres or 19,341 feet above <a href="/wiki/Sea_level" title="Sea level">sea level</a> (the <b>Uhuru Peak</b>/<b>Kibo Peak</b>).
+    </script>
+
+    <script type="text/ng-template" id="html/montblanc.html">
+        <b>Mont Blanc</b> (<small>French pronunciation:&nbsp;​</small><span title="Representation in the International Phonetic Alphabet (IPA)" class="IPA"><a href="/wiki/Help:IPA_for_French" title="Help:IPA for French">[mɔ̃.blɑ̃]</a></span>) or <b>Monte Bianco</b> (<small>Italian pronunciation:&nbsp;</small><span title="Representation in the International Phonetic Alphabet (IPA)" class="IPA"><a href="/wiki/Help:IPA_for_Italian" title="Help:IPA for Italian">[ˈmonte ˈbjaŋko]</a></span>), both meaning "White Mountain", is the highest <a href="/wiki/Mountain" title="Mountain">mountain</a> in the <a href="/wiki/Alps" title="Alps">Alps</a> and the <a href="/wiki/European_Union" title="European Union">European Union</a>.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>1<span>]</span></a></sup> It rises 4,810&nbsp;m (15,781&nbsp;ft)<sup id="cite_ref-smh4810.45_2-0" class="reference"><a href="#cite_note-smh4810.45-2"><span>[</span>2<span>]</span></a></sup> above sea level and is ranked <a href="/wiki/List_of_peaks_by_prominence" title="List of peaks by prominence">11th in the world</a> in <a href="/wiki/Topographic_prominence" title="Topographic prominence">topographic prominence</a>. It is also sometimes known as <i><b>La Dame blanche</b></i> (French for "the White Lady") or <i><b>Il Bianco</b></i> (Italian for "the White One").
+    </script>
+
+    <script type="text/ng-template" id="html/modal.html">
+        <div class="modal-header">
+            <h4 class="modal-title">Unit</h4>
+        </div>
+
+        <div class="modal-body">
+            <form>
+                <div class="radio">
+                    <label>
+                        <input type="radio" value="m" ng-model="data.unit" checked>
+                        Meters
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" ng-model="data.unit" value="f">
+                        Feets
+                    </label>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Close</button>
+            <input type="submit" class="btn btn-primary" ng-click="saveSettings()" value="Save" />
+        </div>
+    </script>
+
+</body>
+</html>
