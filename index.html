@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Elevation Comparator</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <body ng-app="app">
 
@@ -16,7 +17,9 @@
         <p class="lead">Which is the tallest ?</p>
         <div ng-controller="ParentController as parentCtrl">
 
-            <p>You did {{childCtrl.nbComparisons}} comparisons</p>
+            <div id="weather_box" ng-show="parentCtrl.weather.desc">
+                Weather on {{parentCtrl.weather.mountainName}} : {{parentCtrl.weather.desc}}
+            </div>
 
             <div ng-controller="ChildController as childCtrl">
 
@@ -40,7 +43,7 @@
 
                 <p ng-show="childCtrl.highestMountain.name">
                     The highest is {{childCtrl.highestMountain.name}} :
-                    {{childCtrl.units === 'm' ? childCtrl.highestMountain.heightM + ' meters' : childCtrl.highestMountain.heightF + ' feet'}} </p>
+                    {{childCtrl.units === 'm' ? (childCtrl.highestMountain.height | number:0 ) + ' meters' : (childCtrl.highestMountain.height * 3.2808399 | number:0 ) + ' feet'}} </p>
                 <button type="button" class="btn btn-default" ng-click="childCtrl.openSettings()">Change Units</button>
 
                 <br/><br/>
@@ -51,20 +54,6 @@
 
         </div>
     </div>
-
-    <!--Libraries-->
-    <script type="text/javascript" src="js/vendor/jquery-1.11.1.js"></script>
-    <script type="text/javascript" src="js/vendor/angular.js"></script>
-    <script type="text/javascript" src="js/vendor/checklist-model.js"></script>
-    <script type="text/javascript" src="js/vendor/angular-sanitize.js"></script>
-    <script type="text/javascript" src="js/vendor/ui-bootstrap-tpls-0.11.0.js"></script>
-    <script type="text/javascript" src="js/vendor/bootstrap.js"></script>
-
-    <!--Application files-->
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/controllers/parentController.js"></script>
-    <script type="text/javascript" src="js/controllers/childController.js"></script>
-    <script type="text/javascript" src="js/controllers/modalController.js"></script>
 
     <script type="text/ng-template" id="html/everest.html">
         <b>Mount Everest</b>, <a href="#Name">also known</a> in <a href="/wiki/Nepal" title="Nepal">Nepal</a> as <b>Sagarmāthā</b> and in <a href="/wiki/Tibet" title="Tibet">Tibet</a> as <b>Chomolungma</b>, is the <a href="/wiki/Earth" title="Earth">Earth</a>'s <a href="/wiki/List_of_highest_mountains" title="List of highest mountains">highest mountain</a>. It is located in the <a href="/wiki/Mahalangur_Himal" title="Mahalangur Himal">Mahalangur</a> section of the <a href="/wiki/Himalayas" title="Himalayas">Himalayas</a>. Its peak is 8,848 metres (29,029&nbsp;ft) above sea level<sup id="cite_ref-ReferenceB_1-1" class="reference"><a href="#cite_note-ReferenceB-1"><span>[</span>1<span>]</span></a></sup> and is the <a href="/wiki/List_of_mountains#Summits_farthest_from_the_Earth.27s_center" title="List of mountains">5th furthest point from the center of the Earth</a>.<sup id="cite_ref-Robert_Krulwich_6-0" class="reference"><a href="#cite_note-Robert_Krulwich-6"><span>[</span>6<span>]</span></a></sup> The international border between <a href="/wiki/China" title="China">China</a> and Nepal runs across the precise summit point. Its <a href="/wiki/Massif" title="Massif">massif</a> includes neighboring peaks <a href="/wiki/Lhotse" title="Lhotse">Lhotse</a>, 8,516&nbsp;m (27,940&nbsp;ft); <a href="/wiki/Nuptse" title="Nuptse">Nuptse</a>, 7,855&nbsp;m (25,771&nbsp;ft) and <a href="/wiki/Changtse" title="Changtse">Changtse</a>, 7,580&nbsp;m (24,870&nbsp;ft).
@@ -105,6 +94,21 @@
             <input type="submit" class="btn btn-primary" ng-click="saveSettings()" value="Save" />
         </div>
     </script>
+
+    <!--Libraries-->
+    <script type="text/javascript" src="js/vendor/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="js/vendor/angular.js"></script>
+    <script type="text/javascript" src="js/vendor/checklist-model.js"></script>
+    <script type="text/javascript" src="js/vendor/angular-sanitize.js"></script>
+    <script type="text/javascript" src="js/vendor/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap.js"></script>
+
+    <!--Application files-->
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/services/mainService.js"></script>
+    <script type="text/javascript" src="js/controllers/parentController.js"></script>
+    <script type="text/javascript" src="js/controllers/childController.js"></script>
+    <script type="text/javascript" src="js/controllers/modalController.js"></script>
 
 </body>
 </html>

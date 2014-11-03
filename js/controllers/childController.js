@@ -1,25 +1,25 @@
 (function () {
   angular.module("controllers")
-    .controller("ChildController", ["$scope", "$sce", "$modal", "$templateCache", function ($scope, $sce, $modal, $templateCache) {
+    .controller("ChildController", ["$scope", "$modal", "$templateCache", "$sce", function ($scope, $modal, $templateCache, $sce) {
 
       this.mountains = [
         {
           name: "Everest",
-          heightM: 8.848,
-          heightF: 29.029,
+          coordinates: [27.98833,86.92528],
+          height: 8848,
           description: "html/everest.html"
         },
         {
           name: "Kilimandjaro",
-          heightM: 5895,
-          heightF: 19341,
-          description: "html/kilimandjaro.html"
+          coordinates: [-3.076171,37.352824],
+          description: "html/kilimandjaro.html",
+          height: 5895
         },
         {
           name: "Mont Blanc",
-          heightM: 4810,
-          heightF: 15780,
-          description: "html/montblanc.html"
+          coordinates: [45.832627,6.864717],
+          description: "html/montblanc.html",
+          height: 4810
         }
       ];
 
@@ -29,17 +29,19 @@
       this.update = function() {
         var highest = {};
         $.each(that.selectedMountains, function(index, m){
-          if (!highest.name || m.heightF > highest.heightF) {
+          if (!highest.name || m.height > highest.height) {
             highest = m;
           }
         });
         that.highestMountain = highest;
         that.mountainDesc = $sce.trustAsHtml($templateCache.get(this.highestMountain.description));
+
+        $scope.$emit('highestEvent', highest);
       };
 
       this.highestMountain = {};
       this.mountainDesc = $sce.trustAsHtml(this.highestMountain.description);
-      this.units = "m";
+      this.units = 'm';
 
       this.openSettings = function() {
         var modalInstance = $modal.open({
